@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NO FAP!</title>
+    <title>Brave Search</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         <!-- Header Atas -->
         <header class="app-header">
-            <h1 class="app-title">NO FAP!</h1>
+            <h1 class="app-title">Berhenti TOLOL !</h1>
             <div class="header-right">
-                <button id="chatBtn" class="chat-btn">💬 Chat!</button>
                 <button id="menuBtn" class="menu-btn">☰</button>
             </div>
         </header>
 
-        <!-- Dropdown Menu Kanan Atas -->
-        <div id="dropdownMenu" class="dropdown-menu hidden">
-            <button id="menuAllBadges">All Badges</button>
-            <button id="menuMyBadges">My Badges (History)</button>
-        </div>
+        <!-- Sidebar / Drawer Menu dari Kanan -->
+        <div id="sideMenu" class="side-menu">
+            <div class="side-menu-header">
+                <h3>All Badges</h3>
+                <button id="closeSideMenu" class="close-menu-btn">&times;</button>
+            </div>
+            
+            <div id="sideBadgesContainer" class="side-badges-list">
+                <!-- Diisi otomatis via JavaScript -->
+            </div>
 
-        <!-- Lencana Saat Ini -->
+            <button id="menuMyBadges" class="btn-my-badges">My Hisory</button>
+        </div>
+        <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+        <!-- Lencana Saat Ini (Menggunakan Tag Gambar) -->
         <div class="badge-card">
-            <div class="badge-avatar" id="badgeAvatar">🤡</div>
-            <h2 id="badgeTitle">Clown</h2>
-            <p class="badge-subtitle">Current Badge</p>
+            <div class="badge-avatar" id="badgeAvatar">
+                <!-- Foto online sementara, nanti bisa diganti file lokal -->
+                🤡
+            </div>
+            <h1 id="badgeTitle">Mulai</h1>
+            <p class="badge-subtitle"></p>
         </div>
 
-        <!-- Lingkaran Timer -->
-        <div class="timer-circle">
+        <!-- Lingkaran Timer dengan Progress SVG -->
+        <div class="timer-container">
+            <svg class="progress-ring" width="220" height="220">
+                <circle class="progress-ring-bg" cx="110" cy="110" r="100"></circle>
+                <circle id="progressRingFill" class="progress-ring-fill" cx="110" cy="110" r="100"></circle>
+            </svg>
             <div class="timer-content">
                 <span id="daysCount">0</span>
                 <span class="days-label">Days</span>
@@ -39,11 +54,17 @@
             </div>
         </div>
 
-        <!-- Tombol Aksi di Kanan Bawah (Bisa Play ▶ atau Badut 🤡) -->
+        <!-- Tombol Aksi di Kanan Bawah (Play / Badut) -->
         <button id="actionBtn" class="floating-btn play-mode" title="Mulai / Reset">▶</button>
     </div>
 
-    <!-- Modal Umum (Untuk All Badges & History) -->
+    <!-- Audio Musik Latar (Loop & Autoplay) -->
+    <audio id="bgMusic" loop>
+        <source src="assets/Alkahfi Jiharkah.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Modal Umum (History My Badges) -->
     <div id="modal" class="modal hidden">
         <div class="modal-content">
             <span id="closeModal" class="close-btn">&times;</span>
@@ -52,7 +73,7 @@
         </div>
     </div>
 
-    <!-- Modal Khusus: Start Timer From (Foto 2) -->
+    <!-- Modal Khusus: Start Timer From -->
     <div id="startModal" class="modal hidden">
         <div class="modal-content text-center">
             <h3>Start timer from?</h3>
