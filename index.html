@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NO FAP!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Atas -->
+        <header class="app-header">
+            <h1 class="app-title">NO FAP!</h1>
+            <div class="header-right">
+                <button id="chatBtn" class="chat-btn">💬 Chat!</button>
+                <button id="menuBtn" class="menu-btn">☰</button>
+            </div>
+        </header>
+
+        <!-- Dropdown Menu Kanan Atas -->
+        <div id="dropdownMenu" class="dropdown-menu hidden">
+            <button id="menuAllBadges">All Badges</button>
+            <button id="menuMyBadges">My Badges (History)</button>
+        </div>
+
+        <!-- Lencana Saat Ini -->
+        <div class="badge-card">
+            <div class="badge-avatar" id="badgeAvatar">🤡</div>
+            <h2 id="badgeTitle">Clown</h2>
+            <p class="badge-subtitle">Current Badge</p>
+        </div>
+
+        <!-- Lingkaran Timer -->
+        <div class="timer-circle">
+            <div class="timer-content">
+                <span id="daysCount">0</span>
+                <span class="days-label">Days</span>
+                <div id="timeDetail">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Tombol Aksi di Kanan Bawah (Bisa Play ▶ atau Badut 🤡) -->
+        <button id="actionBtn" class="floating-btn play-mode" title="Mulai / Reset">▶</button>
+    </div>
+
+    <!-- Modal Umum (Untuk All Badges & History) -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h3 id="modalTitle">Judul</h3>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Modal Khusus: Start Timer From (Foto 2) -->
+    <div id="startModal" class="modal hidden">
+        <div class="modal-content text-center">
+            <h3>Start timer from?</h3>
+            <div class="modal-buttons">
+                <button id="btnOldDate" class="btn-pill btn-red">Old date</button>
+                <button id="btnNow" class="btn-pill btn-green">Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Khusus: Alasan Relapse / Reset -->
+    <div id="relapseModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Kenapa bisa relapse / gagal?</h3>
+            <textarea id="relapseReason" placeholder="Tuliskan alasannya di sini..." rows="3"></textarea>
+            <div class="modal-buttons" style="margin-top: 15px;">
+                <button id="cancelRelapse" class="btn-pill btn-gray">Batal</button>
+                <button id="submitRelapse" class="btn-pill btn-red">Reset Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
