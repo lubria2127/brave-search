@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brave Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Atas -->
+        <header class="app-header">
+            <h1 class="app-title">Berhenti TOLOL !</h1>
+            <div class="header-right">
+                <button id="menuBtn" class="menu-btn">☰</button>
+            </div>
+        </header>
+
+        <!-- Sidebar / Drawer Menu dari Kanan -->
+        <div id="sideMenu" class="side-menu">
+            <div class="side-menu-header">
+                <h3>All Badges</h3>
+                <button id="closeSideMenu" class="close-menu-btn">&times;</button>
+            </div>
+            
+            <div id="sideBadgesContainer" class="side-badges-list">
+                <!-- Diisi otomatis via JavaScript -->
+            </div>
+
+            <button id="menuMyBadges" class="btn-my-badges">My Hisory</button>
+        </div>
+        <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+        <!-- Lencana Saat Ini (Menggunakan Tag Gambar) -->
+        <div class="badge-card">
+            <div class="badge-avatar" id="badgeAvatar">
+                <!-- Foto online sementara, nanti bisa diganti file lokal -->
+                🤡
+            </div>
+            <h1 id="badgeTitle">Mulai</h1>
+            <p class="badge-subtitle"></p>
+        </div>
+
+        <!-- Lingkaran Timer dengan Progress SVG -->
+        <div class="timer-container">
+            <svg class="progress-ring" width="220" height="220">
+                <circle class="progress-ring-bg" cx="110" cy="110" r="100"></circle>
+                <circle id="progressRingFill" class="progress-ring-fill" cx="110" cy="110" r="100"></circle>
+            </svg>
+            <div class="timer-content">
+                <span id="daysCount">0</span>
+                <span class="days-label">Days</span>
+                <div id="timeDetail">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Tombol Aksi di Kanan Bawah (Play / Badut) -->
+        <button id="actionBtn" class="floating-btn play-mode" title="Mulai / Reset">▶</button>
+    </div>
+
+    <!-- Audio Musik Latar (Loop & Autoplay) -->
+    <audio id="bgMusic" loop>
+        <source src="assets/Alkahfi Jiharkah.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Modal Umum (History My Badges) -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h3 id="modalTitle">Judul</h3>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Modal Khusus: Start Timer From -->
+    <div id="startModal" class="modal hidden">
+        <div class="modal-content text-center">
+            <h3>Start timer from?</h3>
+            <div class="modal-buttons">
+                <button id="btnOldDate" class="btn-pill btn-red">Old date</button>
+                <button id="btnNow" class="btn-pill btn-green">Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Khusus: Alasan Relapse / Reset -->
+    <div id="relapseModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Kenapa bisa relapse / gagal?</h3>
+            <textarea id="relapseReason" placeholder="Tuliskan alasannya di sini..." rows="3"></textarea>
+            <div class="modal-buttons" style="margin-top: 15px;">
+                <button id="cancelRelapse" class="btn-pill btn-gray">Batal</button>
+                <button id="submitRelapse" class="btn-pill btn-red">Reset Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
