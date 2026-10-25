@@ -213,7 +213,7 @@ menuMyBadges.addEventListener("click", () => {
         modalBody.innerHTML = history.map((h, index) => `
             <div class="list-item" style="flex-direction: column; gap: 4px;">
                 <div style="display: flex; justify-content: space-between;">
-                    <span>#${index + 1} - ${h.date}</span>
+                    <span><b style="font-size: 16px; color: rgb(172, 172, 172)">${index + 1}. </b>   ${h.date}</span>
                     <strong style="color: #00e676;">${h.duration}</strong>
                 </div>
                 <small style="color: #bbb;">Catatan: ${h.reason}</small>
@@ -222,7 +222,6 @@ menuMyBadges.addEventListener("click", () => {
     }
     modal.classList.remove("hidden");
 });
-
 closeModal.addEventListener("click", () => modal.classList.add("hidden"));
 window.addEventListener("click", (e) => { if (e.target === modal) modal.classList.add("hidden"); });
 
