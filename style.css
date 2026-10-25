@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .app-container {
@@ -67,32 +68,111 @@ body {
     cursor: pointer;
 }
 
-/* Dropdown Menu */
-.dropdown-menu {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 8px;
+/* Sidebar Drawer dari Kanan */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background-color: #141414;
+    z-index: 1001;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+    transition: right 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    z-index: 50;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    padding: 20px;
 }
 
-.dropdown-menu button {
+.side-menu.open {
+    right: 0;
+}
+
+.side-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #262626;
+    padding-bottom: 10px;
+}
+
+.side-menu-header h3 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.close-menu-btn {
     background: none;
     border: none;
-    color: #fff;
-    padding: 12px 16px;
-    text-align: left;
+    color: #aaa;
+    font-size: 24px;
     cursor: pointer;
-    font-size: 14px;
 }
 
-.dropdown-menu button:hover {
-    background-color: #2c2c2c;
+/* Daftar All Badges di dalam Sidebar */
+.side-badges-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+    margin-bottom: 15px;
+}
+
+.side-badges-list::-webkit-scrollbar {
+    width: 4px;
+}
+.side-badges-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.badge-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1e1e1e;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.badge-thumb {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #444;
+}
+
+/* Tombol My Badges di Bawah Sidebar */
+.btn-my-badges {
+    background: linear-gradient(135deg, #00838f, #00acc1);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 131, 143, 0.3);
+    transition: opacity 0.2s;
+}
+
+.btn-my-badges:hover {
+    opacity: 0.9;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
 }
 
 .hidden {
@@ -104,39 +184,38 @@ body {
     background-color: #ffffff;
     color: #000;
     width: 100%;
-    padding: 24px 20px 16px 20px;
+    padding: 120px 20px 30px 20px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    margin-top: 20px;
+    margin-top: 66px;
     box-shadow: 0 4px 15px rgba(255,255,255,0.1);
 }
 
 .badge-avatar {
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: #ddd;
     position: absolute;
-    top: -40px;
+    top: -60px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
-    border: 3px solid #1e1e1e;
+    border: 5px solid #504f4f;
     overflow: hidden;
 }
 
 .badge-avatar img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: initial;
 }
 
-.badge-card h2 {
-    font-size: 22px;
+.badge-card h1 {
+    font-size: 40px;
     font-weight: bold;
     margin-top: 20px;
 }
@@ -147,23 +226,43 @@ body {
     margin-top: 2px;
 }
 
-/* Timer Circle */
-.timer-circle {
+/* Lingkaran Timer & SVG Progress Bar */
+.timer-container {
+    position: relative;
     width: 220px;
     height: 220px;
-    border-radius: 50%;
-    border: 4px solid #00e676;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 25px rgba(0, 230, 118, 0.15);
     margin: auto 0;
+}
+
+.progress-ring {
+    position: absolute;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: #333333;
+    stroke-width: 5;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: #00e676;
+    stroke-width: 5;
+    stroke-dasharray: 628;
+    stroke-dashoffset: 628;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s linear;
 }
 
 .timer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 2;
 }
 
 #daysCount {
@@ -213,13 +312,6 @@ body {
     overflow: hidden;
 }
 
-.clown-mode img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
 /* Modal Popup Styles */
 .modal {
     position: fixed;
@@ -231,7 +323,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1005;
 }
 
 .modal-content {
@@ -244,9 +336,7 @@ body {
     color: #fff;
 }
 
-.text-center {
-    text-align: center;
-}
+.text-center { text-align: center; }
 
 .close-btn {
     position: absolute;
